@@ -1,0 +1,33 @@
+author: serpdive
+created_at: '2026-07-22T12:00:00Z'
+description:
+  en_US: Web search built for AI agents. One call returns answer-ready page content,
+    extracted from live pages and sized for a context window. Same speed as Tavily,
+    20.2% fewer tokens, 60.7% of decided quality duels won on a public benchmark.
+  zh_Hans: 为 AI 智能体打造的网页搜索。一次调用即可返回可直接用于回答的网页内容，从实时页面提取并适配上下文窗口。与 Tavily 速度相同，token
+    减少 20.2%，在公开基准测试中赢得 60.7% 的有效质量对决。
+icon: icon.png
+label:
+  en_US: SERPdive
+  zh_Hans: SERPdive
+meta:
+  arch:
+  - amd64
+  - arm64
+  runner:
+    entrypoint: main
+    language: python
+    version: '3.12'
+  version: 0.0.1
+name: serpdive
+plugins:
+  tools:
+  - provider/serpdive.yaml
+privacy: PRIVACY.md
+resource:
+  memory: 268435456
+  permission: {}
+tags:
+- search
+type: plugin
+version: 0.0.1

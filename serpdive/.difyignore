@@ -1,0 +1,7 @@
+.venv/
+.env
+.env.example
+.difyignore
+__pycache__/
+*.pyc
+.DS_Store

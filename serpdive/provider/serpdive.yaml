@@ -1,0 +1,35 @@
+credentials_for_provider:
+  serpdive_api_key:
+    help:
+      en_US: Get your API key from the SERPdive dashboard. Every account gets 1,000
+        free credits every month, no card required.
+      zh_Hans: 在 SERPdive 控制台获取您的 API key。每个账户每月免费获得 1,000 积分，无需绑卡。
+    label:
+      en_US: SERPdive API key
+      zh_Hans: SERPdive API key
+    placeholder:
+      en_US: sd_live_...
+      zh_Hans: sd_live_...
+    required: true
+    type: secret-input
+    url: https://serpdive.com/dashboard/keys
+extra:
+  python:
+    source: provider/serpdive.py
+identity:
+  author: serpdive
+  description:
+    en_US: Web search built for AI agents. One call returns answer-ready page content,
+      extracted from live pages and sized for a context window. Same speed as Tavily,
+      20.2% fewer tokens, 60.7% of decided quality duels won on a public benchmark.
+    zh_Hans: 为 AI 智能体打造的网页搜索。一次调用即可返回可直接用于回答的网页内容，从实时页面提取并适配上下文窗口。与 Tavily 速度相同，token
+      减少 20.2%，在公开基准测试中赢得 60.7% 的有效质量对决。
+  icon: icon.png
+  label:
+    en_US: SERPdive
+    zh_Hans: SERPdive
+  name: serpdive
+  tags:
+  - search
+tools:
+- tools/serpdive_search.yaml

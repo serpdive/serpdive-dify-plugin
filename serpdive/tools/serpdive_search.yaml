@@ -1,0 +1,88 @@
+description:
+  human:
+    en_US: Search the web and get extracted, answer-ready page content instead of
+      a list of links.
+    zh_Hans: 搜索网页并直接获得已提取、可用于回答的页面内容，而不是一串链接。
+  llm: Search the web through SERPdive. Returns extracted, answer-ready content
+    from live pages, best sources first. Use it for real-time information, facts,
+    news, and anything outside your training data. The query's language decides
+    where the search runs.
+extra:
+  python:
+    source: tools/serpdive_search.py
+identity:
+  author: serpdive
+  label:
+    en_US: SERPdive Search
+    zh_Hans: SERPdive 搜索
+  name: serpdive_search
+parameters:
+- name: query
+  form: llm
+  human_description:
+    en_US: The search query, as you would ask it. Maximum 300 characters.
+    zh_Hans: 您的搜索查询，像平常提问一样表述。最多 300 个字符。
+  label:
+    en_US: Query
+    zh_Hans: 查询
+  llm_description: The search query, phrased as a plain natural-language question
+    or topic. Maximum 300 characters. The query's language decides where the
+    search runs.
+  required: true
+  type: string
+- name: model
+  default: mako
+  form: llm
+  human_description:
+    en_US: Retrieval depth. Mako is fast and returns the fact-carrying sentences
+      of each source (1 credit). Moby returns the full readable content of every
+      page and takes longer (1.5 credits).
+    zh_Hans: 检索深度。Mako 速度快，返回每个来源中承载事实的句子（1 积分）。Moby 返回每个页面的完整可读内容，耗时更长（1.5 积分）。
+  label:
+    en_US: Model
+    zh_Hans: 模型
+  llm_description: Retrieval depth. 'mako' is fast and returns the fact-carrying
+    sentences of each source. 'moby' returns the full readable content of every
+    page and can take substantially longer. Use 'moby' only when whole-page
+    context is needed.
+  options:
+  - label:
+      en_US: Mako (fast, lean)
+      zh_Hans: Mako（快速、精简）
+    value: mako
+  - label:
+      en_US: Moby (full pages)
+      zh_Hans: Moby（完整页面）
+    value: moby
+  required: false
+  type: select
+- name: answer
+  default: false
+  form: form
+  human_description:
+    en_US: Also return a written answer built from the sources, concise with Mako,
+      detailed with citations with Moby. Included in the price, no extra credits.
+    zh_Hans: 同时返回根据来源撰写的答案，Mako 简洁，Moby 详细并带引用。已包含在价格中，不消耗额外积分。
+  label:
+    en_US: Include Answer
+    zh_Hans: 包含答案
+  llm_description: When set to true, also returns a written answer built from the
+    sources. Concise with 'mako', detailed with numbered citations with 'moby'.
+  required: false
+  type: boolean
+- name: max_results
+  form: llm
+  human_description:
+    en_US: A hard cap on how many results come back, keeping the best-ranked ones
+      (1 to 10). Leave empty to get everything relevant.
+    zh_Hans: 返回结果数量的上限，保留排名最佳的结果（1 到 10）。留空则返回所有相关内容。
+  label:
+    en_US: Max Results
+    zh_Hans: 最大结果数
+  llm_description: A hard cap on how many results come back, keeping the
+    best-ranked ones. Between 1 and 10. Trims the response but does not speed up
+    the search. Omit to get everything the engine considers relevant.
+  max: 10
+  min: 1
+  required: false
+  type: number
