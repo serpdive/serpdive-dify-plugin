@@ -2,6 +2,8 @@
 
 The SERPdive tool connects your Dify agents and workflows to a web search API built for AI: one call returns clean, answer-ready content extracted from live pages instead of a list of links to fetch.
 
+**There is a free tier, and it has no ceiling.** The `krill` model is free and unlimited under fair use — no card, no credits, nothing to decrement. It returns the shortest set of sentences that still answers (about 700 tokens a search, roughly half what the usual alternatives send), one request at a time, at low priority. Use it to build; switch one word to `mako` when you need depth and steady latency.
+
 Quality is measured, not asserted: on a public 1,000-question benchmark judged blind by an independent model, SERPdive won 60.7% of decided quality duels against Tavily's default search while returning 20.2% fewer tokens at the same speed. The methodology and per-question results are open, so anyone can replay the run: [serpdive-benchmark](https://github.com/edendalexis/serpdive-benchmark).
 
 ## Available Actions

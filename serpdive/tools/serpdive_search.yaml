@@ -42,14 +42,20 @@ parameters:
     en_US: Model
     zh_Hans: 模型
   llm_description: Retrieval depth. 'mako' is fast and returns the fact-carrying
-    sentences of each source. 'moby' returns the full readable content of every
-    page and can take substantially longer. Use 'moby' only when whole-page
-    context is needed.
+    sentences of each source. 'krill' is the free tier, unlimited under fair use:
+    the smallest useful payload, one request at a time, at low priority, with no
+    written answer. 'moby' returns the full readable content of every page and
+    can take substantially longer. Use 'moby' only when whole-page context is
+    needed.
   options:
   - label:
       en_US: Mako (fast, lean)
       zh_Hans: Mako（快速、精简）
     value: mako
+  - label:
+      en_US: Krill (free, unlimited)
+      zh_Hans: Krill（免费、无限制）
+    value: krill
   - label:
       en_US: Moby (full pages)
       zh_Hans: Moby（完整页面）

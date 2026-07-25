@@ -44,7 +44,7 @@ class SerpdiveSearchTool(Tool):
             return
 
         model = tool_parameters.get("model")
-        if model not in ("mako", "moby"):
+        if model not in ("krill", "mako", "moby"):
             model = None
         answer = _as_bool(tool_parameters.get("answer"))
         max_results = _as_max_results(tool_parameters.get("max_results"))
