@@ -32,14 +32,16 @@ parameters:
   type: string
 - name: model
   default: mako
-  # Chosen ONCE by the person configuring the tool, not by the agent on every
-  # call. Retrieval depth is a deployment decision — how much context this app
-  # wants per search, and what it is willing to spend — and it does not change
-  # from one user turn to the next. Leaving it to the model also meant handing
-  # the caller a description of our pricing, which is not something an agent
-  # needs to reason about: `human_description` below carries the credit cost,
-  # `llm_description` no longer does.
-  form: form
+  # The agent picks, as it does with any tool parameter — it is the one that
+  # knows whether this particular search needs a whole page or a few sentences.
+  # What it must NOT be told is the price: an agent handed "free and unlimited"
+  # routes everything there, which is a billing decision made by something that
+  # has no business making it. `llm_description` therefore describes CAPABILITY
+  # only — what each depth returns and what it costs in latency and size — and
+  # says plainly that mako is the default and the right answer nearly always.
+  # The credit cost lives in `human_description`, for the person who configures
+  # the tool and is the one actually arbitrating a budget.
+  form: llm
   human_description:
     en_US: Retrieval depth, and what it costs. Mako is fast and returns the
       fact-carrying sentences of each source (1 credit). Krill is the free tier,
@@ -52,6 +54,17 @@ parameters:
   label:
     en_US: Model
     zh_Hans: 模型
+  llm_description: Retrieval depth. Leave this unset unless there is a specific
+    reason not to. 'mako' is the default and the right choice for nearly every
+    search - fast, and it returns the fact-carrying sentences of each source,
+    which is what answering a question needs. 'moby' returns the full readable
+    text of every page instead of selected sentences; it is substantially slower
+    and many times larger, so choose it only when whole-page context is genuinely
+    required, such as reading a document rather than answering about it. 'krill'
+    returns a shallower extraction than mako, with no written answer and one
+    request at a time; it is the lightest and the least complete of the three,
+    so choose it only when a minimal payload matters more than the quality of
+    the answer.
   options:
   - label:
       en_US: Mako (fast, lean)
