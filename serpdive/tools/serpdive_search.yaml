@@ -32,21 +32,26 @@ parameters:
   type: string
 - name: model
   default: mako
-  form: llm
+  # Chosen ONCE by the person configuring the tool, not by the agent on every
+  # call. Retrieval depth is a deployment decision — how much context this app
+  # wants per search, and what it is willing to spend — and it does not change
+  # from one user turn to the next. Leaving it to the model also meant handing
+  # the caller a description of our pricing, which is not something an agent
+  # needs to reason about: `human_description` below carries the credit cost,
+  # `llm_description` no longer does.
+  form: form
   human_description:
-    en_US: Retrieval depth. Mako is fast and returns the fact-carrying sentences
-      of each source (1 credit). Moby returns the full readable content of every
-      page and takes longer (1.5 credits).
-    zh_Hans: 检索深度。Mako 速度快，返回每个来源中承载事实的句子（1 积分）。Moby 返回每个页面的完整可读内容，耗时更长（1.5 积分）。
+    en_US: Retrieval depth, and what it costs. Mako is fast and returns the
+      fact-carrying sentences of each source (1 credit). Krill is the free tier,
+      unlimited under fair use — the smallest useful payload, one request at a
+      time, at low priority, with no written answer (0 credits). Moby returns
+      the full readable content of every page and takes longer (1.5 credits).
+    zh_Hans: 检索深度及其费用。Mako 速度快，返回每个来源中承载事实的句子（1 积分）。Krill
+      是免费套餐，在合理使用范围内无限制——最小可用返回、单次并发、低优先级、不含书面答案（0
+      积分）。Moby 返回每个页面的完整可读内容，耗时更长（1.5 积分）。
   label:
     en_US: Model
     zh_Hans: 模型
-  llm_description: Retrieval depth. 'mako' is fast and returns the fact-carrying
-    sentences of each source. 'krill' is the free tier, unlimited under fair use:
-    the smallest useful payload, one request at a time, at low priority, with no
-    written answer. 'moby' returns the full readable content of every page and
-    can take substantially longer. Use 'moby' only when whole-page context is
-    needed.
   options:
   - label:
       en_US: Mako (fast, lean)
